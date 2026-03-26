@@ -4,6 +4,7 @@ import {
   addWater,
   createMeal,
   createEntry,
+  getAnalytics,
   getTodayEntry,
   setWater,
 } from "../controllers/entry.controller.js";
@@ -15,5 +16,6 @@ router.get("/today", auth, getTodayEntry);
 router.post("/meals", auth, createMeal);
 router.post("/water/add", auth, addWater);
 router.put("/water", auth, setWater);
+router.get("/analytics", auth, getAnalytics);
 
 export default router;

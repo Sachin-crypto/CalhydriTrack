@@ -44,3 +44,12 @@ export const getTodayEntry = async (req, res, next) => {
     next(err);
   }
 };
+
+export const getAnalytics = async (req, res, next) => {
+  try {
+    const data = await entryService.getAnalytics(req.userId, req.query);
+    res.json(data);
+  } catch (err) {
+    next(err);
+  }
+};

@@ -54,6 +54,12 @@ export default function Navbar() {
               >
                 Profile
               </Link>
+              <Link
+                href="/analytics"
+                className="rounded-lg px-3 py-2 transition-colors hover:bg-emerald-50 hover:text-emerald-700"
+              >
+                Analytics
+              </Link>
               <button
                 onClick={handleLogout}
                 className="rounded-lg bg-gray-900 px-3 py-2 text-white hover:bg-gray-800"
