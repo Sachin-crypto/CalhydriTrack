@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum MealType {
+  BREAKFAST
+  LUNCH
+  DINNER
+  SNACKS
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  heightCm  Float?
+  weightKg  Float?
+  age       Int?
+  createdAt DateTime @default(now())
+  goals     Goal?
+  entries   Entry[]
+  meals     Meal[]
+}
+
+model Entry {
+  id        Int      @id @default(autoincrement())
+  date      DateTime
+  calories  Int
+  water     Int
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Goal {
+  id        Int  @id @default(autoincrement())
+  calories  Int
+  water     Int
+  userId    Int  @unique
+  user      User @relation(fields: [userId], references: [id])
+}
+
+model Meal {
+  id        Int      @id @default(autoincrement())
+  mealType  MealType
+  name      String
+  calories  Int
+  date      DateTime
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+}
