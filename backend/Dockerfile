@@ -1,14 +1,15 @@
-FROM node:20
+FROM node:20-alpine
 
 WORKDIR /app
 
+ENV NODE_ENV=production
+
 COPY package*.json ./
-RUN npm install
+# Keep dev deps so Prisma CLI is available for migrate deploy.
+RUN npm ci
 
 COPY . .
 
-
-
 EXPOSE 5000
 
-CMD ["node", "src/server.js"]
+CMD ["sh", "-c", "npx prisma generate && npx prisma migrate deploy && node src/server.js"]
